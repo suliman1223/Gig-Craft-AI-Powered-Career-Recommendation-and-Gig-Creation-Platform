@@ -1,0 +1,2 @@
+# Gig-Craft-AI-Powered-Career-Recommendation-and-Gig-Creation-Platform
+Gig Craft AI is an intelligent AI-powered recommendation and freelance assistance platform designed to simplify recruitment and freelancing processes using Artificial Intelligence, NLP, Machine Learning, Large Language Models, and Retrieval-Augmented Generation technique. It is web Application designed Using Mern Technologies and Database .
