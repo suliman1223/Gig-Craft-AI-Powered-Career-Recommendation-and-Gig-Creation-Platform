@@ -1,0 +1,126 @@
+.how-section {
+  padding: 100px 60px;
+  background: #f8fafc;
+  text-align: center;
+}
+
+/* TITLE */
+.how-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.how-subtitle {
+  margin-top: 10px;
+  color: #64748b;
+}
+
+/* GRID (IMPORTANT CHANGE → 8 CARDS) */
+.how-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.how-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* HOVER EFFECT */
+.how-card:hover {
+  transform: translateY(-10px);
+  border: 1px solid #2563eb;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* ICON */
+.how-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+
+.how-card h3 {
+  font-size: 16px;
+  color: #1e293b;
+}
+
+
+.how-card p {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1200px) {
+  .how-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .how-section {
+    padding: 80px 40px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .how-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .how-title {
+    font-size: 28px;
+  }
+
+  .how-section {
+    padding: 70px 30px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-section {
+    padding: 60px 20px;
+  }
+
+  .how-card {
+    text-align: center;
+  }
+
+  .how-title {
+    font-size: 24px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .how-title {
+    font-size: 22px;
+  }
+
+  .how-subtitle {
+    font-size: 14px;
+  }
+
+  .how-card {
+    padding: 20px;
+  }
+
+  .how-icon {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" width="100%" height="100%">
+  <defs>
+    <!-- Gradient for the top half of the G and upper circuit tracks -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E73E6"/>
+      <stop offset="100%" stop-color="#1A62D6"/>
+    </linearGradient>
+    
+    <!-- Gradient for the bottom half of the G and lower circuit tracks -->
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C3EC1"/>
+      <stop offset="100%" stop-color="#512DA8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- BACKGROUND (Optional, matching the clean canvas) -->
+  <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+  <!-- LOGO MARK ICON -->
+  <g transform="translate(20, 20)">
+    
+    <!-- UPPER HEXAGON / G-TOP (Blue Section) -->
+    <path d="M 200,30 
+             L 290,82 
+             L 290,125 
+             L 260,110 
+             L 260,100 
+             L 200,65 
+             L 140,100 
+             L 140,170 
+             L 110,170 
+             L 110,82 Z" 
+          fill="url(#blueGrad)" />
+
+    <!-- LOWER HEXAGON / G-BOTTOM & INNER BAR (Purple Section) -->
+    <path d="M 110,185 
+             L 140,185 
+             L 140,230 
+             L 200,265 
+             L 260,230 
+             L 260,160 
+             L 200,160 
+             L 200,130 
+             L 290,130 
+             L 290,248 
+             L 200,300 
+             L 110,248 Z" 
+          fill="url(#purpleGrad)" />
+
+    <!-- CIRCUIT LINES (LEFT SIDE) -->
+    <g stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      
+      <!-- Line 1 (Top Blue) -->
+      <path d="M 110,95 L 75,95 L 55,120 L 35,120" stroke="url(#blueGrad)"/>
+      <circle cx="30" cy="120" r="6" stroke="url(#blueGrad)" stroke-width="4" fill="#FFFFFF"/>
+
+      <!-- Line 2 (Middle-Top Blue) -->
+      <path d="M 110,135 L 85,135 L 45,155 L 15,155" stroke="url(#blueGrad)"/>
+      <circle cx="10" cy="155" r="6" stroke="url(#blueGrad)" stroke-width="4" fill="#FFFFFF"/>
+
+      <!-- Line 3 (Middle-Bottom Purple) -->
+      <path d="M 110,160 L 80,160 L 50,180 L 25,180" stroke="url(#purpleGrad)"/>
+      <circle cx="20" cy="180" r="6" stroke="url(#purpleGrad)" stroke-width="4" fill="#FFFFFF"/>
+
+      <!-- Line 4 (Bottom Purple) -->
+      <path d="M 110,185 L 90,185 L 70,205 L 45,205" stroke="url(#purpleGrad)"/>
+      <circle cx="40" cy="205" r="6" stroke="url(#purpleGrad)" stroke-width="4" fill="#FFFFFF"/>
+      
+    </g>
+  </g>
+
+  <!-- TYPOGRAPHY / TEXT SECTION -->
+  <!-- Using a clean sans-serif stack to emulate the geometric typeface -->
+  <text x="200" y="370" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    <tspan fill="#0B1A30" font-weight="800" font-size="44px" letter-spacing="-1px">GigCraft</tspan>
+    <tspan fill="#1E73E6" font-weight="700" font-size="44px" letter-spacing="-0.5px"> AI</tspan>
+  </text>
+</svg>
