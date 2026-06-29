@@ -30,29 +30,43 @@
   gap: 10px;
 }
 
-.login-btn {
-  padding: 8px 15px;
-  border: 1px solid #2563EB;
+.nav-login-btn {
+  padding: 10px 22px;
+  border: 1px solid #2563eb;
   background: transparent;
-  color: #2563EB;
-  border-radius: 6px;
-}
-.login-btn:hover{
-    background-color: black;
-    color: white;
+  color: #2563eb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  transition: 0.3s ease;
 }
 
-.signup-btn {
-  padding: 8px 15px;
-  background: #2563EB;
+.nav-login-btn:hover {
+  background: #2563eb;
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
-.signup-btn:hover{
-    background-color: #07276b;
-    }
+
+.nav-signup-btn {
+  padding: 10px 22px;
+  background: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  width: auto;
+  height: auto;
+  transition: 1s ease;
+}
+
+.nav-signup-btn:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
 .logo{
     width: 4rem;
     height: 4rem;

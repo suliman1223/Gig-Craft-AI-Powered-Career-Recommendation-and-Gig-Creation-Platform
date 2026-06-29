@@ -21,14 +21,14 @@ function Navbar() {
 
       <div className="nav-buttons">
         <button
-          className="login-btn"
+          className="nav-login-btn"
           onClick={() => navigate("/login")}
         >
-          Login
+        Login
         </button>
 
         <button
-          className="signup-btn"
+          className="nav-signup-btn"
           onClick={() => navigate("/signup")}
         >
           Get Started
