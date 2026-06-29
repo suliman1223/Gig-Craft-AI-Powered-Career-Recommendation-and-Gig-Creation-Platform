@@ -1,0 +1,65 @@
+.companies-section {
+  padding: 80px 60px;
+  background: #ffffff;
+  text-align: center;
+}
+
+/* TITLE */
+.companies-title {
+  font-size: 28px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* SUBTITLE */
+.companies-subtitle {
+  margin-top: 10px;
+  color: #64748b;
+}
+
+/* GRID */
+.companies-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  justify-content: center;
+  margin-left: 10rem;
+}
+
+/* CARD */
+.company-card {
+  padding: 20px;
+  font-size: 70px;
+  background: #f8fafc;
+  border-radius: 12px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid transparent;
+  transition: transform 0.3s ease;
+  justify-content: space-between;
+  
+}
+
+/* HOVER EFFECT (VERY IMPORTANT FOR SAAS LOOK) */
+.company-card:hover {
+  transform: scale(1.2);
+  color: #0077ff;
+  border: 1px solid #2563eb;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .companies-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .companies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

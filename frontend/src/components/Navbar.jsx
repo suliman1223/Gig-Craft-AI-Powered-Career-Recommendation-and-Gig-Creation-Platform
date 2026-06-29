@@ -1,9 +1,42 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/Navbar.css";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
-    <div>Navbar</div>
-  )
+    <nav className="navbar border-bottom">
+
+      <div className="logo" onClick={() => navigate("/")}>
+        <img src="assets/logo/Logo.svg" alt="Logo image" className="logo"/>
+      </div>
+
+      <ul className="nav-links">
+        <li onClick={() => navigate("/")}><a> Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#howItWorks">How it Works</a></li>
+        <li><a href="">Jobs</a></li>
+      </ul>
+
+      <div className="nav-buttons">
+        <button
+          className="login-btn"
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </button>
+
+        <button
+          className="signup-btn"
+          onClick={() => navigate("/signup")}
+        >
+          Get Started
+        </button>
+      </div>
+
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

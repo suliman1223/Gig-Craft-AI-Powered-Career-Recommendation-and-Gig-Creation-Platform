@@ -1,0 +1,82 @@
+.footer {
+  background: #0f172a;
+  color: white;
+  padding: 60px 40px 20px;
+}
+
+/* MAIN CONTAINER */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+/* BRAND */
+.footer-brand h2 {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* LINKS */
+.footer-links h3 {
+  margin-bottom: 15px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-links li:hover {
+  color: white;
+  padding-left: 5px;
+}
+
+/* CONTACT */
+.footer-contact p {
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+/* BOTTOM BAR */
+.footer-bottom {
+  margin-top: 40px;
+  border-top: 1px solid #1e293b;
+  padding-top: 15px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+.logo{
+    width: 4rem;
+    height: 4rem;
+}
+.ab{
+    color: white;
+    text-decoration:none ;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
