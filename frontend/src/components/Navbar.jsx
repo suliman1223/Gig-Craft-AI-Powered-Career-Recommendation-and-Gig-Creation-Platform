@@ -14,9 +14,9 @@ function Navbar() {
 
       <ul className="nav-links">
         <li onClick={() => navigate("/")}><a> Home</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#howItWorks">How it Works</a></li>
-        <li><a href="">Jobs</a></li>
+        <li onClick={() => navigate("/dashboard")}><a>Dashboard</a></li>
+        <li onClick={() => navigate("/upload-cv")}><a>Uplaod-CV</a></li>
+        
       </ul>
 
       <div className="nav-buttons">
