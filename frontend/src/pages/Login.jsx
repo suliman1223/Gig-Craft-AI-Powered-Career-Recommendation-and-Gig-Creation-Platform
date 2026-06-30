@@ -2,11 +2,14 @@ import React from "react";
 import "../css/login.css";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
   const navigate = useNavigate();
 
   return (
+
     <section className="login">
+        
 
       {/* LEFT */}
       <div className="login-left">
