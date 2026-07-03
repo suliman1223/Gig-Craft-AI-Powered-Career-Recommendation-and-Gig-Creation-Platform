@@ -1,6 +1,7 @@
 const express =require ("express");
 const cors = require("cors");
 const  cookieParser= require("cookie-parser");
+const authRoutes = require("./routes/authRoutes.js");
 const app = express();
 app.use(cors({
   origin: "http://localhost:5173",
@@ -16,5 +17,6 @@ app.get("/api/health", (req, res) => {
     message: "GigCraft AI backend is running",
   });
 });
+app.use("/api/auth", authRoutes);
 
 module.exports = app;
