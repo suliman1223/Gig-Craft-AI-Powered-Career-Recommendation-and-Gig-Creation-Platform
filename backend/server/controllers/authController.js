@@ -27,15 +27,16 @@ const sendTokenResponse = (user, statusCode, res, message, rememberMe) => {
     });
 };
 const Signup = async (req, res) => {
-    console.log("Signup request body:", req.body);
     const { name, email, password } = req.body;
-    if (!name || !email || !password) {
+    const normalizedEmail = (email || "").trim().toLowerCase();
+
+    if (!name || !normalizedEmail || !password) {
         return res.status(400).json({
             success: false,
             message: "Please provide name,email and password",
         });
     }
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
         return res.status(400).json({
             success: false,
@@ -46,8 +47,8 @@ const Signup = async (req, res) => {
 
     try {
         const user = await User.create({
-            name,
-            email,
+            name: name.trim(),
+            email: normalizedEmail,
             password,
         });
         sendTokenResponse(user, 201, res, "User registered successfully", req.body.rememberMe);
@@ -65,14 +66,15 @@ const Signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password, rememberMe } = req.body;
-        if (!email || !password) {
+        const normalizedEmail = (email || "").trim().toLowerCase();
+        if (!normalizedEmail || !password) {
             return res.status(400).json({
                 success: false,
                 message: "Please provide email and password",
             });
         }
 
-        const user = await User.findOne({ email }).select("+password");
+        const user = await User.findOne({ email: normalizedEmail }).select("+password");
         if (!user) {
             return res.status(401).json({
                 success: false,
