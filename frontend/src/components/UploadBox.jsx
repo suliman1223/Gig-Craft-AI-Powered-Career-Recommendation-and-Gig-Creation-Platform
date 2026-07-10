@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "../css/UploadCV.css";
-import axios from "axios";
-import { API_URL } from "../config.js";
-import { uploadResume } from "../services/resumeService";
+import { uploadResume, extractResume } from "../services/resumeService";
 
 function UploadBox({
   inputId = "cv-upload",
@@ -12,6 +10,7 @@ function UploadBox({
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [extractedSkills, setExtractedSkills] = useState([]);
 
   const allowedTypes = [
     "application/pdf",
@@ -50,6 +49,7 @@ function UploadBox({
       setLoading(true);
 
       const result = await uploadResume(selectedFile);
+      setExtractedSkills(result.skills || []);
 
       alert("Resume uploaded successfully!");
 
@@ -68,6 +68,33 @@ function UploadBox({
 
       setLoading(false);
 
+    }
+  };
+
+  const [parsed, setParsed] = useState(null);
+
+  const handleExtract = async () => {
+    if (!selectedFile) return;
+
+    try {
+      setLoading(true);
+      const result = await extractResume(selectedFile);
+      const parsedData = result.parsed || result;
+
+      setExtractedSkills(parsedData.skills || []);
+      setParsed(parsedData);
+
+      alert("Resume extracted successfully");
+    } catch (err) {
+      console.error('Extract error', err);
+      const details = err.response?.data || err.message || err;
+      // show richer message when available
+      alert(
+        (err.response?.data?.message ? `${err.response.data.message}` : "Extraction failed") +
+          (err.response?.data?.details ? `: ${JSON.stringify(err.response.data.details)}` : "")
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +128,8 @@ function UploadBox({
         <strong>{selectedFile ? selectedFile.name : "No file selected"}</strong>
       </div>
 
+      {/* Detected skills are shown in the parsed results to avoid duplicate/lexicon displays */}
+
       {error && <p className="file-error">{error}</p>}
 
       <div className="upload-actions">
@@ -113,11 +142,63 @@ function UploadBox({
         </button>
 
         {showExtractButton && (
-          <button className="extract-btn" disabled={!selectedFile}>
-            Extract Skills
+          <button className="extract-btn" disabled={!selectedFile || loading} onClick={handleExtract}>
+            {loading ? "Extracting..." : "Extract CV"}
           </button>
         )}
       </div>
+      {parsed && (
+        <div className="parsed-results">
+          {parsed.summary && (
+            <div className="file-info">
+              <span>Summary:</span>
+              <div>{parsed.summary}</div>
+            </div>
+          )}
+
+          {parsed.skills?.length > 0 && (
+            <div className="file-info">
+              <span>Skills:</span>
+              <strong>{parsed.skills.join(", ")}</strong>
+            </div>
+          )}
+
+          {parsed.education?.length > 0 && (
+            <div className="file-info">
+              <span>Education:</span>
+              <ul>{parsed.education.map((e, i) => <li key={i}>{e}</li>)}</ul>
+            </div>
+          )}
+
+          {parsed.experience?.length > 0 && (
+            <div className="file-info">
+              <span>Experience:</span>
+              <ul>{parsed.experience.map((e, i) => <li key={i}>{e}</li>)}</ul>
+            </div>
+          )}
+
+          {parsed.projects?.length > 0 && (
+            <div className="file-info">
+              <span>Projects:</span>
+              <ul>{parsed.projects.map((p, i) => <li key={i}>{p}</li>)}</ul>
+            </div>
+          )}
+
+          {parsed.certifications?.length > 0 && (
+            <div className="file-info">
+              <span>Certifications:</span>
+              <ul>{parsed.certifications.map((c, i) => <li key={i}>{c}</li>)}</ul>
+            </div>
+          )}
+
+          {parsed.languages?.length > 0 && (
+            <div className="file-info">
+              <span>Languages:</span>
+              <ul>{parsed.languages.map((l, i) => <li key={i}>{l}</li>)}</ul>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
