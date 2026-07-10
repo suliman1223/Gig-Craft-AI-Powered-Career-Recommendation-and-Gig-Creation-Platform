@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "../css/UploadCV.css";
+import axios from "axios";
+import { API_URL } from "../config.js";
+import { uploadResume } from "../services/resumeService";
 
 function UploadBox({
   inputId = "cv-upload",
@@ -8,6 +11,7 @@ function UploadBox({
 }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const allowedTypes = [
     "application/pdf",
@@ -38,6 +42,33 @@ function UploadBox({
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+  const handleUpload = async () => {
+    if (!selectedFile) return;
+
+    try {
+      setLoading(true);
+
+      const result = await uploadResume(selectedFile);
+
+      alert("Resume uploaded successfully!");
+
+      console.log(result);
+
+    } catch (err) {
+
+      console.log(err);
+
+      alert(
+        err.response?.data?.message ||
+        "Upload failed"
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
   };
 
   return (
@@ -73,8 +104,12 @@ function UploadBox({
       {error && <p className="file-error">{error}</p>}
 
       <div className="upload-actions">
-        <button className="upload-main-btn" disabled={!selectedFile}>
-          Upload CV
+        <button
+          className="upload-main-btn"
+          disabled={!selectedFile || loading}
+          onClick={handleUpload}
+        >
+          {loading ? "Uploading..." : "Upload CV"}
         </button>
 
         {showExtractButton && (

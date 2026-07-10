@@ -1,6 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
+import {
+  FaHome,
+  FaBell,
+  FaUserCircle,
+  FaUpload,
+  FaSignOutAlt,
+  FaCog,
+  FaBriefcase
+} from "react-icons/fa";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,9 +22,9 @@ function Navbar() {
       </div>
 
       <ul className="nav-links">
-        <li onClick={() => navigate("/")}><a> Home</a></li>
-        <li onClick={() => navigate("/dashboard")}><a>Dashboard</a></li>
-        <li onClick={() => navigate("/upload-cv")}><a>Uplaod-CV</a></li>
+        <li onClick={() => navigate("/")}><a> <FaHome /> Home</a></li>
+        <li onClick={() => navigate("/dashboard")}><a> <FaBriefcase /> Dashboard</a></li>
+        <li onClick={() => navigate("/upload-cv")}><a> <FaUpload /> Upload CV</a></li>
         
       </ul>
 

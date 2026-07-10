@@ -12,7 +12,7 @@ import "../css/global.css";
 function Home() {
   return (
     <div className="home-container">
-      <Navbar />
+      <Navbar isAuthenticated={false} />
       <Hero />
       <Companies />
       <HowItWorks />
