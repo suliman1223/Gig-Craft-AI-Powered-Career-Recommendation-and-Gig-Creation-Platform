@@ -2,6 +2,8 @@ const express =require ("express");
 const cors = require("cors");
 const  cookieParser= require("cookie-parser");
 const authRoutes = require("./routes/authRoutes.js");
+const resumeRoutes = require("./routes/uploadRoutes.js");
+const path = require("path");
 const app = express();
 app.use(cors({
   origin: [
@@ -15,6 +17,10 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
+);
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({
@@ -23,5 +29,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 app.use("/api/auth", authRoutes);
+app.use("/api/resume", resumeRoutes);
 
 module.exports = app;
