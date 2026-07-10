@@ -4,6 +4,8 @@ import UploadBox from "../components/UploadBox";
 import SkillCard from "../components/SkillCard";
 import JobMatchCard from "../components/JobMatchCard";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../config.js";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -46,9 +48,21 @@ function Dashboard() {
       missingSkills: ["Redis", "Docker"],
     },
   ];
-
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    } finally {
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("authUser");
+      navigate("/login");
+    }
+  };
   return (
+
     <section className="dashboard-page">
+      
       <aside className="dashboard-sidebar">
         <div className="sidebar-logo">
           <h2>GigCraft AI</h2>
@@ -65,7 +79,9 @@ function Dashboard() {
         </nav>
 
         <div className="sidebar-footer">
-          <button className="logout-btn" onClick={() => navigate("/login")}>Logout</button>
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </aside>
 
