@@ -6,6 +6,7 @@ function UploadBox({
   inputId = "cv-upload",
   compact = false,
   showExtractButton = false,
+  onExtractSuccess,
 }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState("");
@@ -42,32 +43,21 @@ function UploadBox({
   const handleDragOver = (e) => {
     e.preventDefault();
   };
+
   const handleUpload = async () => {
     if (!selectedFile) return;
 
     try {
       setLoading(true);
-
       const result = await uploadResume(selectedFile);
       setExtractedSkills(result.skills || []);
-
       alert("Resume uploaded successfully!");
-
       console.log(result);
-
     } catch (err) {
-
       console.log(err);
-
-      alert(
-        err.response?.data?.message ||
-        "Upload failed"
-      );
-
+      alert(err.response?.data?.message || "Upload failed");
     } finally {
-
       setLoading(false);
-
     }
   };
 
@@ -79,20 +69,23 @@ function UploadBox({
     try {
       setLoading(true);
       const result = await extractResume(selectedFile);
-      const parsedData = result.parsed || result;
+      
+      // Fix: Safely read the backend's key structures
+      const parsedData = result.resume || result.parsed || result;
+      const recommendedJobs = result.recommended_jobs || [];
 
       setExtractedSkills(parsedData.skills || []);
       setParsed(parsedData);
 
+      if (onExtractSuccess) {
+        onExtractSuccess(parsedData, recommendedJobs);
+      }
+
       alert("Resume extracted successfully");
     } catch (err) {
       console.error('Extract error', err);
-      const details = err.response?.data || err.message || err;
-      // show richer message when available
-      alert(
-        (err.response?.data?.message ? `${err.response.data.message}` : "Extraction failed") +
-          (err.response?.data?.details ? `: ${JSON.stringify(err.response.data.details)}` : "")
-      );
+      const errMsg = err.response?.data?.message || err.response?.data?.error || err.message || "Extraction failed";
+      alert(errMsg);
     } finally {
       setLoading(false);
     }
@@ -128,8 +121,6 @@ function UploadBox({
         <strong>{selectedFile ? selectedFile.name : "No file selected"}</strong>
       </div>
 
-      {/* Detected skills are shown in the parsed results to avoid duplicate/lexicon displays */}
-
       {error && <p className="file-error">{error}</p>}
 
       <div className="upload-actions">
@@ -147,6 +138,7 @@ function UploadBox({
           </button>
         )}
       </div>
+
       {parsed && (
         <div className="parsed-results">
           {parsed.summary && (
