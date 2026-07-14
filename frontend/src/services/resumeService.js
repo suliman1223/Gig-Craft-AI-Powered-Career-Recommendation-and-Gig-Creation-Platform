@@ -12,9 +12,21 @@ export const uploadResume = async (file) => {
     formData,
     {
       withCredentials: true,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    }
+  );
+
+  return response.data;
+};
+
+export const extractResume = async (file) => {
+  const formData = new FormData();
+  formData.append("resume", file);
+
+  const response = await axios.post(
+    `${API_URL}/resume/extract`,
+    formData,
+    {
+      withCredentials: true,
     }
   );
 

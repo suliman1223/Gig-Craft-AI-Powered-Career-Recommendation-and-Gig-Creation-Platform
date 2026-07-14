@@ -1,7 +1,9 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import "../css/signup.css";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function Signup() {
   const navigate = useNavigate();
@@ -24,7 +26,6 @@ function Signup() {
     setMessage("");
 
     try {
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
       const response = await axios.post(`${API_URL}/auth/signup`, formData, {
         withCredentials: true,
       });
